@@ -1,0 +1,8 @@
+Place the file `sqlite-jdbc-3.7.2.jar` in this folder.
+
+Download URL:
+  https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.7.2/sqlite-jdbc-3.7.2.jar
+
+This top-level lib/ folder is for development/IDE convenience.
+At runtime Tomcat reads the jar from `WebContent/WEB-INF/lib/sqlite-jdbc-3.7.2.jar`,
+so make sure a copy lives there too.

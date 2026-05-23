@@ -1,0 +1,14 @@
+Place the file `sqlite-jdbc-3.7.2.jar` in this folder before running the
+web application on Tomcat 9.
+
+Download from Maven Central:
+  https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.7.2/sqlite-jdbc-3.7.2.jar
+
+Expected path:
+  WebContent/WEB-INF/lib/sqlite-jdbc-3.7.2.jar
+
+Tomcat will pick it up automatically. The DBConnection class loads the
+"org.sqlite.JDBC" driver from this jar.
+
+You can also keep a copy in the project's top-level lib/ folder, but
+it is the WEB-INF/lib copy that matters at runtime.

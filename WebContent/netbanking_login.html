@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- NetBanking Login (Servlet US001) - plain HTML form -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NetBanking Login (Servlet)</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">NetBanking Login (Servlet)</h3>
+                    <p class="text-muted text-center small">
+                        Enter the predefined password (<code>netbank123</code>) to log in.
+                    </p>
+                    <form action="netbankingLogin" method="post">
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="text" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Login</button>
+                    </form>
+                </div>
+            </div>
+            <p class="text-center mt-3"><a href="index.jsp">Home</a></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
