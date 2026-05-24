@@ -137,7 +137,13 @@ For NetBanking login (Servlet US001 / JSP US003): use the predefined password
 | `/netbankingLogin`        | Servlet endpoint that validates predefined password |
 | `/netbanking_login_jsp.jsp` | Same module via JSP (US003) |
 | `/customer_login.jsp`     | Customer login form |
-| `/customerLogin`          | Servlet that validates against `customer` table (US002) |
+| `/customerLogin`          | Servlet that validates against `customer` table (US002), redirects to dashboard |
+| `/customer_home.jsp`      | **Customer dashboard** (after login) - balance, account info, quick actions |
+| `/customer/transaction`   | Customer makes a deposit / withdraw on their own account |
+| `/customer/loan`          | Customer applies for a loan |
+| `/customer/my-transactions` | Customer views their own transaction history |
+| `/customer/my-loans`      | Customer tracks their own loan applications |
+| `/customer/logout`        | Customer logout (invalidates session) |
 | `/simpleCustomer`         | Simple customer CRUD via Servlet (US004) |
 | `/simple_customer_jsp.jsp`| Simple customer CRUD via JSP (US005) |
 

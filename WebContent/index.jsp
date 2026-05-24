@@ -36,9 +36,9 @@
                 <div class="card-body">
                     <h5>Other modules</h5>
                     <ul class="list-unstyled mb-0">
+                        <li><a href="<%= request.getContextPath() %>/customer_login.jsp"><strong>Customer Portal Login</strong></a> &nbsp;<span class="text-muted small">(make transactions, apply for loans)</span></li>
                         <li><a href="<%= request.getContextPath() %>/netbanking_login.html">NetBanking Login (Servlet)</a></li>
                         <li><a href="<%= request.getContextPath() %>/netbanking_login_jsp.jsp">NetBanking Login (JSP)</a></li>
-                        <li><a href="<%= request.getContextPath() %>/customer_login.jsp">Customer Login (DB)</a></li>
                         <li><a href="<%= request.getContextPath() %>/simpleCustomer">Simple Customer CRUD (Servlet)</a></li>
                         <li><a href="<%= request.getContextPath() %>/simple_customer_jsp.jsp">Simple Customer CRUD (JSP)</a></li>
                     </ul>

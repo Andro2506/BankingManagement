@@ -162,6 +162,53 @@
     <url-pattern>/customerLogin</url-pattern>
   </servlet-mapping>
 
+  <!-- ===================== Customer Portal (post-login) ===================== -->
+
+  <servlet>
+    <servlet-name>CustomerLogout</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerLogout</servlet-name>
+    <url-pattern>/customer/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerTransaction</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerTransactionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerTransaction</servlet-name>
+    <url-pattern>/customer/transaction</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerLoan</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerLoanServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerLoan</servlet-name>
+    <url-pattern>/customer/loan</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerMyTransactions</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerMyTransactionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerMyTransactions</servlet-name>
+    <url-pattern>/customer/my-transactions</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerMyLoans</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerMyLoansServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerMyLoans</servlet-name>
+    <url-pattern>/customer/my-loans</url-pattern>
+  </servlet-mapping>
+
   <servlet>
     <servlet-name>SimpleCustomer</servlet-name>
     <servlet-class>com.bank.servlet.SimpleCustomerServlet</servlet-class>
