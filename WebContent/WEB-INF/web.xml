@@ -46,6 +46,25 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 
+  <!-- Manager-only employee management -->
+  <servlet>
+    <servlet-name>EmployeeList</servlet-name>
+    <servlet-class>com.bank.servlet.EmployeeListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeList</servlet-name>
+    <url-pattern>/employees</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EmployeeEditDesignation</servlet-name>
+    <servlet-class>com.bank.servlet.EmployeeEditDesignationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeEditDesignation</servlet-name>
+    <url-pattern>/employee/edit-designation</url-pattern>
+  </servlet-mapping>
+
   <!-- ===================== Customer UI ===================== -->
 
   <servlet>

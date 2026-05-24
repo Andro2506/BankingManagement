@@ -129,6 +129,58 @@ public class EmployeeDAO {
     }
 
     /**
+     * Returns the total number of rows in the employee table.
+     * Used by the Manager dashboard to show "how many employees we have".
+     */
+    public int count() {
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        int total = 0;
+        try {
+            con = DBConnection.getConnection();
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT COUNT(*) FROM employee");
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("EmployeeDAO.count error:");
+            e.printStackTrace();
+        } finally {
+            try { if (rs != null) rs.close(); } catch (SQLException ignore) {}
+            try { if (st != null) st.close(); } catch (SQLException ignore) {}
+            DBConnection.close(con);
+        }
+        return total;
+    }
+
+    /**
+     * Update only the designation column for one employee.
+     * Returns true on success. Used by the Manager-only edit screen.
+     */
+    public boolean updateDesignation(int employeeId, String newDesignation) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        boolean ok = false;
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(
+                "UPDATE employee SET designation = ? WHERE employee_id = ?");
+            ps.setString(1, newDesignation);
+            ps.setInt(2, employeeId);
+            ok = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("EmployeeDAO.updateDesignation error:");
+            e.printStackTrace();
+        } finally {
+            try { if (ps != null) ps.close(); } catch (SQLException ignore) {}
+            DBConnection.close(con);
+        }
+        return ok;
+    }
+
+    /**
      * Get all employees.
      */
     public List<Employee> findAll() {

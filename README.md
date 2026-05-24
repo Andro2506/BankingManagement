@@ -123,6 +123,8 @@ For NetBanking login (Servlet US001 / JSP US003): use the predefined password
 | `/register`               | Employee registration (US001) |
 | `/login` / `/logout`      | Employee login (US002) / logout |
 | `/home.jsp`               | Employee dashboard |
+| `/employees`              | **Manager only** - list every employee + total count |
+| `/employee/edit-designation` | **Manager only** - change one employee's designation (Clerk/Manager/Accountant) |
 | `/customers`              | Customer list view |
 | `/customer/register`      | Register new customer (US003) |
 | `/customer/edit?ssn=...`  | Edit customer (US004) |
@@ -173,6 +175,27 @@ java -cp ... com.bank.javadb.UnixFileDemo \
 
 The four required Unix shell equivalents are listed in
 `UnixFileDemo.java` Javadoc.
+
+---
+
+## Roles & permissions
+
+The employee designation column drives feature visibility:
+
+| Capability | Clerk | Accountant | Manager |
+|---|---|---|---|
+| Customer CRUD (US003-US005) | yes | yes | yes |
+| Record / list transactions (US006) | yes | yes | yes |
+| Initiate / edit / delete loans (US006-US007) | yes | yes | yes |
+| **View all employees + total count** | no | no | **yes** |
+| **Edit any employee's designation** | no | no | **yes** |
+
+A Manager cannot demote themselves to a non-Manager designation
+(prevents accidentally locking themselves out of the manager screen).
+
+The "Manage Employees" link appears in the navbar and the dashboard tile
+only when the logged-in employee's designation is `Manager`. To try it,
+log in with the seeded Manager id **1000002** (password `pass123`).
 
 ---
 
