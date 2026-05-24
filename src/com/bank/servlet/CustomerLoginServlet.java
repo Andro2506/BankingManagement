@@ -1,7 +1,6 @@
 package com.bank.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,8 +14,10 @@ import com.bank.model.Customer;
 /**
  * Customer Login - Servlet (US002 from Servlet sheet).
  *
- * Validates a Username (Customer SSN) + Password against the database.
- * Prints "Login Successful" or "Login Unsuccessful" in the browser.
+ * Validates a Username (Customer SSN) + Password against the customer table.
+ * On success, stores the Customer in the session and redirects to the
+ * customer dashboard page (customer_home.jsp) where the customer can
+ * make transactions, apply for loans, and view their history.
  */
 public class CustomerLoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -26,39 +27,42 @@ public class CustomerLoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Show the JSP form
+        // Show the JSP login form
         request.getRequestDispatcher("/customer_login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+            throws ServletException, IOException {
 
+        // Read input fields
         String username = request.getParameter("username"); // SSN id
         String password = request.getParameter("password");
 
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-
-        out.println("<html><head><title>Customer Login Result</title>");
-        out.println("<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css'>");
-        out.println("</head><body class='p-4'>");
-
-        Customer c = dao.login(username, password);
-        if (c != null) {
-            // Save in session for any follow-up pages
-            HttpSession session = request.getSession(true);
-            session.setAttribute("loggedInCustomer", c);
-
-            out.println("<div class='alert alert-success'><h2>Login Successful</h2>");
-            out.println("Welcome, " + c.getFullName() + " (SSN: " + c.getCustomerSsnId() + ")");
-            out.println("</div>");
-        } else {
-            out.println("<div class='alert alert-danger'><h2>Login Unsuccessful</h2>");
-            out.println("Invalid username or password.");
-            out.println("</div>");
+        // Basic server-side validation
+        if (username == null || username.trim().isEmpty()
+                || password == null || password.trim().isEmpty()) {
+            request.setAttribute("error", "Please enter both Username and Password.");
+            request.getRequestDispatcher("/customer_login.jsp").forward(request, response);
+            return;
         }
-        out.println("<a href='customer_login.jsp' class='btn btn-primary'>Back</a>");
-        out.println("</body></html>");
+
+        // Validate against the customer table
+        Customer c = dao.login(username.trim(), password);
+
+        if (c == null) {
+            // Login failed -> show the form again with an error message
+            request.setAttribute("error", "Login Unsuccessful. Invalid SSN or password.");
+            request.getRequestDispatcher("/customer_login.jsp").forward(request, response);
+            return;
+        }
+
+        // Login OK -> save the customer in the session and redirect to dashboard
+        HttpSession session = request.getSession(true);
+        session.setAttribute("loggedInCustomer", c);
+        session.setAttribute("customerLoginSuccess", true);
+
+        // PRG (Post-Redirect-Get) - prevents form re-submission on refresh
+        response.sendRedirect(request.getContextPath() + "/customer_home.jsp");
     }
 }

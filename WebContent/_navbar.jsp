@@ -3,6 +3,8 @@
 <%@ page import="com.bank.model.Employee" %>
 <%
     Employee navEmp = (Employee) session.getAttribute("loggedInEmployee");
+    // Managers see one extra menu entry that other employees do not.
+    boolean isManager = navEmp != null && "Manager".equalsIgnoreCase(navEmp.getDesignation());
 %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
   <div class="container-fluid">
@@ -12,6 +14,11 @@
         <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/customers">Customers</a></li>
         <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/transactions">Transactions</a></li>
         <li class="nav-item"><a class="nav-link" href="<%= request.getContextPath() %>/loans">Loans</a></li>
+        <% if (isManager) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= request.getContextPath() %>/employees">Manage Employees</a>
+          </li>
+        <% } %>
       </ul>
       <ul class="navbar-nav">
         <% if (navEmp != null) { %>

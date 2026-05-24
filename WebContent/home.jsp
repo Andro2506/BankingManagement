@@ -9,6 +9,15 @@
     }
     Boolean justLoggedIn = (Boolean) session.getAttribute("loginSuccess");
     session.removeAttribute("loginSuccess");
+
+    // Pull and clear any flash messages set by other servlets
+    String flashMessage = (String) session.getAttribute("flashMessage");
+    String flashError   = (String) session.getAttribute("flashError");
+    if (flashMessage != null) session.removeAttribute("flashMessage");
+    if (flashError   != null) session.removeAttribute("flashError");
+
+    // Used to decide whether to show Manager-only tile
+    boolean isManager = "Manager".equalsIgnoreCase(emp.getDesignation());
 %>
 <!DOCTYPE html>
 <html>
@@ -27,6 +36,13 @@
         Welcome, <strong><%= emp.getFullName() %></strong>
         (Employee ID <%= emp.getEmployeeId() %>, <%= emp.getDesignation() %>)
     </div>
+
+    <% if (flashMessage != null) { %>
+        <div class="alert alert-info"><%= flashMessage %></div>
+    <% } %>
+    <% if (flashError != null) { %>
+        <div class="alert alert-danger"><%= flashError %></div>
+    <% } %>
 
     <div class="row g-3">
         <div class="col-md-4">
@@ -59,6 +75,22 @@
                 </div>
             </div>
         </div>
+
+        <%-- Manager-only tile: appears only when the logged-in user is a Manager --%>
+        <% if (isManager) { %>
+        <div class="col-md-4">
+            <div class="card h-100 border-warning">
+                <div class="card-body">
+                    <h5>Employees <span class="badge bg-warning text-dark">Manager only</span></h5>
+                    <p class="small text-muted">
+                        See how many employees are on staff and change anyone's designation.
+                    </p>
+                    <a href="<%= request.getContextPath() %>/employees"
+                       class="btn btn-warning btn-sm">Manage Employees</a>
+                </div>
+            </div>
+        </div>
+        <% } %>
     </div>
 </div>
 

@@ -46,6 +46,25 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
 
+  <!-- Manager-only employee management -->
+  <servlet>
+    <servlet-name>EmployeeList</servlet-name>
+    <servlet-class>com.bank.servlet.EmployeeListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeList</servlet-name>
+    <url-pattern>/employees</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EmployeeEditDesignation</servlet-name>
+    <servlet-class>com.bank.servlet.EmployeeEditDesignationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeEditDesignation</servlet-name>
+    <url-pattern>/employee/edit-designation</url-pattern>
+  </servlet-mapping>
+
   <!-- ===================== Customer UI ===================== -->
 
   <servlet>
@@ -160,6 +179,53 @@
   <servlet-mapping>
     <servlet-name>CustomerLogin</servlet-name>
     <url-pattern>/customerLogin</url-pattern>
+  </servlet-mapping>
+
+  <!-- ===================== Customer Portal (post-login) ===================== -->
+
+  <servlet>
+    <servlet-name>CustomerLogout</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerLogout</servlet-name>
+    <url-pattern>/customer/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerTransaction</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerTransactionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerTransaction</servlet-name>
+    <url-pattern>/customer/transaction</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerLoan</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerLoanServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerLoan</servlet-name>
+    <url-pattern>/customer/loan</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerMyTransactions</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerMyTransactionsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerMyTransactions</servlet-name>
+    <url-pattern>/customer/my-transactions</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CustomerMyLoans</servlet-name>
+    <servlet-class>com.bank.servlet.CustomerMyLoansServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerMyLoans</servlet-name>
+    <url-pattern>/customer/my-loans</url-pattern>
   </servlet-mapping>
 
   <servlet>

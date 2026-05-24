@@ -171,6 +171,36 @@ public class LoanDAO {
     }
 
     /**
+     * Get all loans belonging to a specific customer (by SSN).
+     * Newest first.
+     */
+    public List<Loan> findByCustomer(String ssn) {
+        List<Loan> list = new ArrayList<Loan>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(
+                "SELECT * FROM loan WHERE customer_ssn_id = ? ORDER BY loan_id DESC");
+            ps.setString(1, ssn);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(mapRow(rs));
+            }
+        } catch (SQLException e) {
+            System.err.println("LoanDAO.findByCustomer error:");
+            e.printStackTrace();
+        } finally {
+            try { if (rs != null) rs.close(); } catch (SQLException ignore) {}
+            try { if (ps != null) ps.close(); } catch (SQLException ignore) {}
+            DBConnection.close(con);
+        }
+        return list;
+    }
+
+    /**
      * Helper: map one ResultSet row to a Loan object.
      */
     private Loan mapRow(ResultSet rs) throws SQLException {
